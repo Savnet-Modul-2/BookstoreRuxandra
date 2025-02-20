@@ -29,7 +29,7 @@ public class User {
     @Column(name = "GENDER")
     private String gender;
 
-    @Column(name = "EMAIL")
+    @Column(name = "EMAIL", unique = true)
     private String email;
 
     @Column(name = "PHONE_NUMBER")

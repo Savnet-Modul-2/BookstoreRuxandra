@@ -18,13 +18,10 @@ public class EmailService {
 
     public void sendEmailVerification(User user) {
         user.setVerificationCode(new Random().nextLong(10000, 100000));
-        userRepository.save(user);
-
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(user.getEmail());
         message.setSubject("Verification code");
         message.setText("The verification code is: " + user.getVerificationCode());
-
         mailSender.send(message);
     }
 }

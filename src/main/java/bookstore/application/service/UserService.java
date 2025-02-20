@@ -1,7 +1,11 @@
 package bookstore.application.service;
 
 import bookstore.application.entity.User;
+import bookstore.application.exceptions.IncorrectPasswordException;
+import bookstore.application.exceptions.ProvidedUserIdException;
+import bookstore.application.mapper.UserMapper;
 import bookstore.application.repository.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +22,7 @@ public class UserService {
 
     public User create(User user) {
         if (user.getId() != null) {
-            throw new RuntimeException("You cannot provide an ID to a new user that you want to create");
+            throw new ProvidedUserIdException("You cannot provide an ID to a new user that you want to create");
         }
         String password = PasswordService.getMd5(user.getPassword());
         user.setPassword(password);
@@ -27,11 +31,22 @@ public class UserService {
     }
 
     public User verifyCode(Long id, Long code){
-        User userToVerify = userRepository.findById(id).orElseThrow(()->new RuntimeException("User not found"));
+        User userToVerify = userRepository.findById(id).orElseThrow(()->new EntityNotFoundException("User not found"));
         if(!Objects.equals(userToVerify.getVerificationCode(), code)){
             throw new RuntimeException("Incorrect verification code");
         }
         userToVerify.setVerifiedAccount(true);
         return userRepository.save(userToVerify);
+    }
+
+    public User loginUser(User user){
+        User userToLogin = userRepository.findByEmail(user.getEmail()).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        System.out.println(userToLogin);
+        String encodedPassword = PasswordService.getMd5(user.getPassword());
+        assert userToLogin != null;
+        if(encodedPassword.equals(userToLogin.getPassword())){
+            return userToLogin;
+        }
+        throw new IncorrectPasswordException("Incorrect password");
     }
 }
