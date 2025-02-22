@@ -1,5 +1,6 @@
 package bookstore.application.entity;
 
+import bookstore.application.enums.Gender;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,7 +28,7 @@ public class User {
     private Integer yearOfBirth;
 
     @Column(name = "GENDER")
-    private String gender;
+    private Gender gender;
 
     @Column(name = "EMAIL", unique = true)
     private String email;

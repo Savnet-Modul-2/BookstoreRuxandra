@@ -1,5 +1,6 @@
 package bookstore.application.dto;
 
+import bookstore.application.enums.Gender;
 import lombok.*;
 
 @Getter
@@ -17,7 +18,7 @@ public class UserDto {
 
     private Integer yearOfBirth;
 
-    private String gender;
+    private Gender gender;
 
     private String email;
 
