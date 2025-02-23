@@ -15,8 +15,7 @@ public class PasswordService {
                 hashtext.insert(0, "0");
             }
             return hashtext.toString();
-        }
-        catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
     }

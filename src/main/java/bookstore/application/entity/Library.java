@@ -36,4 +36,9 @@ public class Library {
             orphanRemoval = true,
             fetch = FetchType.LAZY)
     private List<Book> books;
+
+    public void addBook(Book book) {
+        books.add(book);
+        book.setLibrary(this);
+    }
 }

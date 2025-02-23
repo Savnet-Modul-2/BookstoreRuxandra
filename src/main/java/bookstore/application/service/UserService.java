@@ -29,20 +29,20 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User verifyCode(String email, Long code){
-        User userToVerify = userRepository.findByEmail(email).orElseThrow(()->new EntityNotFoundException("User not found"));
-        if(!Objects.equals(userToVerify.getVerificationCode(), code)){
+    public User verifyCode(String email, Long code) {
+        User userToVerify = userRepository.findByEmail(email).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        if (!Objects.equals(userToVerify.getVerificationCode(), code)) {
             throw new RuntimeException("Incorrect verification code");
         }
         userToVerify.setVerifiedAccount(true);
         return userRepository.save(userToVerify);
     }
 
-    public User login(User user){
+    public User login(User user) {
         User userToLogin = userRepository.findByEmail(user.getEmail()).orElseThrow(() -> new EntityNotFoundException("User not found"));
         String encodedPassword = PasswordService.getMd5(user.getPassword());
         assert userToLogin != null;
-        if(encodedPassword.equals(userToLogin.getPassword())){
+        if (encodedPassword.equals(userToLogin.getPassword())) {
             return userToLogin;
         }
         throw new IncorrectPasswordException("Incorrect password");
