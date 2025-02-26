@@ -23,15 +23,15 @@ public class UserController {
     }
 
     @PutMapping("/verify-account")
-    public ResponseEntity<?> verifyCode(@RequestParam Long id, @RequestParam Long verificationCode) {
-        User verifiedUser = userService.verifyCode(id, verificationCode);
+    public ResponseEntity<?> verifyCode(@RequestParam String email, @RequestParam Long verificationCode) {
+        User verifiedUser = userService.verifyCode(email, verificationCode);
         return ResponseEntity.ok(verifiedUser);
     }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody UserDto user) {
         User mappedUser = UserMapper.mapUserDtoToUser.apply(user);
-        User loginUser = userService.loginUser(mappedUser);
+        User loginUser = userService.login(mappedUser);
         UserDto loginUserDto = UserMapper.mapUserToUserDto.apply(loginUser);
         return ResponseEntity.ok(loginUserDto);
     }
