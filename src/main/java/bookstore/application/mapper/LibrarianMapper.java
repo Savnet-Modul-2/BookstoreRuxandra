@@ -18,7 +18,6 @@ public class LibrarianMapper {
                 .password(librarianDto.getPassword())
                 .library(LibraryMapper.mapLibraryDtoToLibrary.apply(librarianDto.getLibraryDto()))
                 .build();
-        //TODO: (accountVerified)
     }
 
     private static LibrarianDto mapLibrarianToLibrarianDto(Librarian librarian) {
@@ -29,6 +28,5 @@ public class LibrarianMapper {
                 .password(librarian.getPassword())
                 .libraryDto(LibraryMapper.mapLibraryToLibraryDto.apply(librarian.getLibrary()))
                 .build();
-        //TODO: (accountVerified)
     }
 }

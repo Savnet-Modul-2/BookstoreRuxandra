@@ -9,6 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @Builder
+@EqualsAndHashCode
 public class UserDto {
     private Long id = null;
 

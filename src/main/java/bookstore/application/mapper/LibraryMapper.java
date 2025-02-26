@@ -16,10 +16,6 @@ public class LibraryMapper {
                 .id(libraryDto.getId())
                 .address(libraryDto.getAddress())
                 .phoneNumber(libraryDto.getPhoneNumber())
-                .books(libraryDto.getBooks() != null ?
-                        libraryDto.getBooks().stream()
-                                .map(BookMapper.mapBookDtoToBook)
-                                .toList() : new ArrayList<>())
                 .build();
     }
 
@@ -28,10 +24,6 @@ public class LibraryMapper {
                 .id(library.getId())
                 .address(library.getAddress())
                 .phoneNumber(library.getPhoneNumber())
-                .books(library.getBooks() != null ?
-                        library.getBooks().stream()
-                                .map(BookMapper.mapBookToBookDto)
-                                .toList() : new ArrayList<>())
                 .build();
     }
 }

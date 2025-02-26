@@ -23,22 +23,24 @@ public class LibraryService {
         return libraryRepository.save(library);
     }
 
-    public void removeBook(Long libraryId, Book book) {
-        Library library = libraryRepository.findById(libraryId).orElseThrow(() -> new EntityNotFoundException("Library not found"));
+    public Book addBook(Long libraryId, Book book) {
+        Library library = libraryRepository.findById(libraryId)
+                .orElseThrow(() -> new EntityNotFoundException("Library not found"));
+        if (!library.getBooks().contains(book)) {
+            library.add(book);
+            bookRepository.save(book);
+            return book;
+        }
+        throw new EntityExistsException("Book already exists");
+    }
+
+    public void remove(Long libraryId, Book book) {
+        Library library = libraryRepository.findById(libraryId)
+                .orElseThrow(() -> new EntityNotFoundException("Library not found"));
         if (!library.getBooks().contains(book)) {
             throw new EntityNotFoundException("Book doesn't exist");
         }
         library.getBooks().remove(book);
         bookRepository.delete(book);
-    }
-
-    public Book add(Long libraryId, Book book) {
-        Library library = libraryRepository.findById(libraryId).orElseThrow(() -> new EntityNotFoundException("Library not found"));
-        if (!library.getBooks().contains(book)) {
-            library.addBook(book);
-            bookRepository.save(book);
-            return book;
-        }
-        throw new EntityExistsException("Book already exists");
     }
 }

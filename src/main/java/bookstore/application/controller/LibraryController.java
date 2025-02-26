@@ -21,14 +21,14 @@ public class LibraryController {
     @PostMapping("/{libraryId}")
     public ResponseEntity<?> addBook(@PathVariable Long libraryId, @RequestBody BookDto book) {
         Book bookToAdd = BookMapper.mapBookDtoToBook.apply(book);
-        Book addedBook = libraryService.add(libraryId, bookToAdd);
+        Book addedBook = libraryService.addBook(libraryId, bookToAdd);
         return ResponseEntity.ok(BookMapper.mapBookToBookDto.apply(addedBook));
     }
 
     @DeleteMapping("/{libraryId}/{bookId}")
     public ResponseEntity<?> removeBook(@PathVariable Long libraryId, @PathVariable Long bookId) {
         Book bookToRemove = bookService.findById(bookId);
-        libraryService.removeBook(libraryId, bookToRemove);
+        libraryService.remove(libraryId, bookToRemove);
         return ResponseEntity.ok(BookMapper.mapBookToBookDto.apply(bookToRemove));
     }
 }

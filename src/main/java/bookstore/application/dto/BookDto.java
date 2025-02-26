@@ -12,6 +12,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @ToString
 @Builder
+@EqualsAndHashCode
 public class BookDto {
     private Long id;
 

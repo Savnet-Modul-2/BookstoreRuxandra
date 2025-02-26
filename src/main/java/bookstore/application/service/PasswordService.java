@@ -10,11 +10,11 @@ public class PasswordService {
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] messageDigest = md.digest(input.getBytes());
             BigInteger no = new BigInteger(1, messageDigest);
-            StringBuilder hashtext = new StringBuilder(no.toString(16));
-            while (hashtext.length() < 32) {
-                hashtext.insert(0, "0");
+            StringBuilder hashText = new StringBuilder(no.toString(16));
+            while (hashText.length() < 32) {
+                hashText.insert(0, "0");
             }
-            return hashtext.toString();
+            return hashText.toString();
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }

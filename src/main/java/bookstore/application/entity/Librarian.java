@@ -9,6 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @Builder
+@EqualsAndHashCode
 @Entity(name = "librarian")
 @Table(name = "librarian", schema = "public")
 public class Librarian {
@@ -32,7 +33,4 @@ public class Librarian {
     @JoinColumn(name = "library_id",
             referencedColumnName = "id")
     private Library library;
-
-//    @Column(name = "ACCOUNT_VERIFIED")
-//    private Boolean accountVerified;
 }

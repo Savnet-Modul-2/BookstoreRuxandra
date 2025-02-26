@@ -10,6 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 @Builder
+@EqualsAndHashCode
 public class LibraryDto {
     private Long id;
 

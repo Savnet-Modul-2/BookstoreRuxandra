@@ -11,6 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 @Builder
+@EqualsAndHashCode
 @Entity(name = "library")
 @Table(name = "library", schema = "public")
 public class Library {
@@ -37,7 +38,7 @@ public class Library {
             fetch = FetchType.LAZY)
     private List<Book> books;
 
-    public void addBook(Book book) {
+    public void add(Book book) {
         books.add(book);
         book.setLibrary(this);
     }

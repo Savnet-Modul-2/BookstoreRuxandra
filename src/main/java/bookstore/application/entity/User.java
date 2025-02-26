@@ -10,6 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @Builder
+@EqualsAndHashCode
 @Entity(name = "user")
 @Table(name = "user", schema = "public")
 public class User {

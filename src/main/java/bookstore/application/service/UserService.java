@@ -30,7 +30,8 @@ public class UserService {
     }
 
     public User verifyCode(String email, Long code) {
-        User userToVerify = userRepository.findByEmail(email).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        User userToVerify = userRepository.findByEmail(email)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
         if (!Objects.equals(userToVerify.getVerificationCode(), code)) {
             throw new RuntimeException("Incorrect verification code");
         }
@@ -39,7 +40,8 @@ public class UserService {
     }
 
     public User login(User user) {
-        User userToLogin = userRepository.findByEmail(user.getEmail()).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        User userToLogin = userRepository.findByEmail(user.getEmail())
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
         String encodedPassword = PasswordService.getMd5(user.getPassword());
         assert userToLogin != null;
         if (encodedPassword.equals(userToLogin.getPassword())) {

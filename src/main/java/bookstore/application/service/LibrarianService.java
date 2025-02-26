@@ -29,7 +29,8 @@ public class LibrarianService {
     }
 
     public Librarian login(Librarian librarian) {
-        Librarian librarianToLogin = librarianRepository.findByEmail(librarian.getEmail()).orElseThrow(() -> new EntityNotFoundException("Librarian not found"));
+        Librarian librarianToLogin = librarianRepository.findByEmail(librarian.getEmail())
+                .orElseThrow(() -> new EntityNotFoundException("Librarian not found"));
         String encodedPassword = PasswordService.getMd5(librarian.getPassword());
         if (encodedPassword.equals(librarianToLogin.getPassword())) {
             return librarianToLogin;

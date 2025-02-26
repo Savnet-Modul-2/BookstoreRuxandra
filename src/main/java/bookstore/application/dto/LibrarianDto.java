@@ -8,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @Builder
+@EqualsAndHashCode
 public class LibrarianDto {
     private Long id;
 
@@ -18,6 +19,4 @@ public class LibrarianDto {
     private String password;
 
     private LibraryDto libraryDto;
-
-//    private Boolean accountVerified;
 }
