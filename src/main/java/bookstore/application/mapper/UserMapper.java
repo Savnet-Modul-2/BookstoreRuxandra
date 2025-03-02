@@ -22,6 +22,7 @@ public class UserMapper {
                 .password(userDto.getPassword())
                 .country(userDto.getCountry())
                 .verifiedAccount(userDto.getVerifiedAccount())
+                .verificationCode(userDto.getVerificationCode())
                 .build();
     }
 
@@ -37,6 +38,7 @@ public class UserMapper {
                 .password(user.getPassword())
                 .country(user.getCountry())
                 .verifiedAccount(user.getVerifiedAccount())
+                .verificationCode(user.getVerificationCode())
                 .build();
     }
 }
