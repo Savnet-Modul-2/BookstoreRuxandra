@@ -7,6 +7,7 @@ import bookstore.application.repository.ExemplaryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +35,10 @@ public class ExemplaryService {
 
     public List<Exemplary> getAll(Long bookId) {
         return exemplaryRepository.findByBookId(bookId);
+    }
+
+    public Exemplary findFirstAvailable(Long bookId, LocalDate startDate, LocalDate endDate) {
+        return exemplaryRepository.findFirstAvailable(bookId, startDate, endDate);
     }
 
     public void delete(Long bookId) {

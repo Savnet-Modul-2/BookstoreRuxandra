@@ -57,4 +57,9 @@ public class User {
             orphanRemoval = true,
             mappedBy = "user")
     private List<Reservation> reservations = new ArrayList<>();
+
+    public void add(Reservation reservation) {
+        reservations.add(reservation);
+        reservation.setUser(this);
+    }
 }

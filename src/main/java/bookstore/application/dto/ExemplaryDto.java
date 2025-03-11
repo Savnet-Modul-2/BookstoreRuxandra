@@ -1,6 +1,5 @@
 package bookstore.application.dto;
 
-import bookstore.application.entity.Book;
 import lombok.*;
 
 @Getter
@@ -16,4 +15,6 @@ public class ExemplaryDto {
     private String publisher;
 
     private Integer maximumReservationDuration;
+
+    private BookDto book;
 }

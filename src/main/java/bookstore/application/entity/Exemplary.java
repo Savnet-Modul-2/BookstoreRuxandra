@@ -36,4 +36,9 @@ public class Exemplary {
             orphanRemoval = true,
             mappedBy = "exemplary")
     private List<Reservation> reservations = new ArrayList<>();
+
+    public void add(Reservation reservation) {
+        reservations.add(reservation);
+        reservation.setExemplary(this);
+    }
 }
