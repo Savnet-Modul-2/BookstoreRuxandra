@@ -4,6 +4,9 @@ import bookstore.application.enums.Gender;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -48,4 +51,10 @@ public class User {
 
     @Column(name = "VERIFICATION_CODE")
     private Long verificationCode;
+
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            orphanRemoval = true,
+            mappedBy = "user")
+    private List<Reservation> reservations = new ArrayList<>();
 }

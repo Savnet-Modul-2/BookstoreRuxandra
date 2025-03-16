@@ -1,8 +1,7 @@
 package bookstore.application.dto;
 
+import bookstore.application.entity.Book;
 import lombok.*;
-
-import java.util.List;
 
 @Getter
 @Setter
@@ -11,10 +10,10 @@ import java.util.List;
 @ToString
 @Builder
 @EqualsAndHashCode
-public class LibraryDto {
+public class ExemplaryDto {
     private Long id;
 
-    private String address;
+    private String publisher;
 
-    private String phoneNumber;
+    private Integer maximumReservationDuration;
 }
