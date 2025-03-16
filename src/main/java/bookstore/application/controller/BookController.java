@@ -49,7 +49,7 @@ public class BookController {
         return ResponseEntity.ok(booksDto.get());
     }
 
-    @GetMapping()
+    @GetMapping("/title-and-author")
     public ResponseEntity<?> findByTitleAndAuthor(
             @RequestParam(value = "title") String title,
             @RequestParam(value = "author") String author) {

@@ -1,11 +1,11 @@
 package bookstore.application.dto;
 
 import bookstore.application.enums.ReservationStatus;
-import bookstore.application.validator.DateValidator;
-import bookstore.application.validator.dateFuture.DateFutureValidator;
-import bookstore.application.validator.dateFuture.ValidDateFuture;
-import bookstore.application.validator.dateOrder.DateOrderValidator;
-import bookstore.application.validator.dateOrder.ValidDateOrder;
+import bookstore.application.validator.reservationDate.DateValidator;
+import bookstore.application.validator.reservationDate.dateFuture.DateFutureValidator;
+import bookstore.application.validator.reservationDate.dateFuture.ValidDateFuture;
+import bookstore.application.validator.reservationDate.dateOrder.DateOrderValidator;
+import bookstore.application.validator.reservationDate.dateOrder.ValidDateOrder;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 

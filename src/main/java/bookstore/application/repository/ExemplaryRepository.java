@@ -24,6 +24,6 @@ public interface ExemplaryRepository extends JpaRepository<Exemplary, Long> {
                     LIMIT 1
             """, nativeQuery = true)
     Exemplary findFirstAvailable(@Param("bookId") Long bookId,
-                                 @Param("startDate") LocalDate startDate,
-                                 @Param("endDate") LocalDate endDate);
+                                           @Param("startDate") LocalDate startDate,
+                                           @Param("endDate") LocalDate endDate);
 }

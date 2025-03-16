@@ -4,6 +4,7 @@ import bookstore.application.entity.Book;
 import bookstore.application.entity.Exemplary;
 import bookstore.application.repository.BookRepository;
 import bookstore.application.repository.ExemplaryRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,7 @@ public class ExemplaryService {
     public List<Exemplary> create(Exemplary exemplary, Long bookId, Integer exemplarsNumber) {
         List<Exemplary> exemplars = new ArrayList<>();
         Book book = bookRepository.findById(bookId)
-                .orElseThrow(() -> new RuntimeException("Book not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Book not found"));
         for (int i = 0; i < exemplarsNumber; i++) {
             Exemplary newExemplary = new Exemplary();
             newExemplary.setPublisher(exemplary.getPublisher());
@@ -38,6 +39,8 @@ public class ExemplaryService {
     }
 
     public Exemplary findFirstAvailable(Long bookId, LocalDate startDate, LocalDate endDate) {
+        bookRepository.findById(bookId)
+                .orElseThrow(() -> new EntityNotFoundException("Book not found"));
         return exemplaryRepository.findFirstAvailable(bookId, startDate, endDate);
     }
 

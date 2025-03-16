@@ -30,7 +30,7 @@ public class ExemplaryController {
         return ResponseEntity.ok(createdExemplarsDto);
     }
 
-    @GetMapping("/{bookId}")
+    @GetMapping("/all/{bookId}")
     public ResponseEntity<?> getAll(@PathVariable Long bookId) {
         List<Exemplary> exemplars = exemplaryService.getAll(bookId);
         return ResponseEntity.ok(exemplars.stream()

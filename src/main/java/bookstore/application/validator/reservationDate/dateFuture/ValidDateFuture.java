@@ -1,4 +1,4 @@
-package bookstore.application.validator.dateOrder;
+package bookstore.application.validator.reservationDate.dateFuture;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
@@ -9,11 +9,11 @@ import java.lang.annotation.Target;
 
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-@Constraint(validatedBy = { OrderDateValidator.class})
-@Target(ElementType.TYPE)
+@Constraint(validatedBy = { FutureDateValidator.class})
+@Target(ElementType.FIELD)
 @Retention(RUNTIME)
-public @interface ValidDateOrder {
-    String message() default "The start date must be before the end date";
+public @interface ValidDateFuture {
+    String message() default "The date must be in the future";
 
     Class<?>[] groups() default {};
 

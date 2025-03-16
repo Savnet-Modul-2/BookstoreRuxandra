@@ -8,8 +8,10 @@ import bookstore.application.mapper.ReservationMapper;
 import bookstore.application.mapper.UserMapper;
 import bookstore.application.service.ReservationService;
 import bookstore.application.service.UserService;
+import bookstore.application.validator.ContactInformationSequence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,7 +24,8 @@ public class UserController {
     private ReservationService reservationService;
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody UserDto user) {
+    public ResponseEntity<?> create(@Validated(ContactInformationSequence.class)
+                                    @RequestBody UserDto user) {
         User mappedUser = UserMapper.mapUserDtoToUser.apply(user);
         User createdUser = userService.create(mappedUser);
         UserDto createdUserDto = UserMapper.mapUserToUserDto.apply(createdUser);

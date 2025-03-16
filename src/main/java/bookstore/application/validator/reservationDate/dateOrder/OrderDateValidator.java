@@ -1,4 +1,4 @@
-package bookstore.application.validator.dateOrder;
+package bookstore.application.validator.reservationDate.dateOrder;
 
 import bookstore.application.dto.ReservationDto;
 import jakarta.validation.ConstraintValidator;

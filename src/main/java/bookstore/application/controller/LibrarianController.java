@@ -4,8 +4,10 @@ import bookstore.application.dto.LibrarianDto;
 import bookstore.application.entity.Librarian;
 import bookstore.application.mapper.LibrarianMapper;
 import bookstore.application.service.LibrarianService;
+import bookstore.application.validator.ContactInformationSequence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,7 +17,8 @@ public class LibrarianController {
     private LibrarianService librarianService;
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody LibrarianDto librarian) {
+    public ResponseEntity<?> create(@Validated(ContactInformationSequence.class)
+                                    @RequestBody LibrarianDto librarian) {
         Librarian mappedLibrarian = LibrarianMapper.mapLibrarianDtoToLibrarian.apply(librarian);
         Librarian createdLibrarian = librarianService.create(mappedLibrarian);
         LibrarianDto createdLibrarianDto = LibrarianMapper.mapLibrarianToLibrarianDto.apply(createdLibrarian);

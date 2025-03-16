@@ -1,4 +1,4 @@
-package bookstore.application.validator.dateFuture;
+package bookstore.application.validator.reservationDate.dateFuture;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

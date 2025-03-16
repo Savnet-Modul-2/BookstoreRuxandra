@@ -14,8 +14,12 @@ public class ReservationService {
     private ReservationRepository reservationRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private BookRepository bookRepository;
 
     public Reservation create(Long bookId, Long userId, Reservation reservation) {
+        bookRepository.findById(bookId)
+                .orElseThrow(() -> new EntityNotFoundException("Book not found"));
         Exemplary exemplary = exemplaryRepository
                 .findFirstAvailable(bookId, reservation.getStartDate(), reservation.getEndDate());
         User user = userRepository.findById(userId)
@@ -29,7 +33,7 @@ public class ReservationService {
         return reservation;
     }
 
-    public Reservation updateStatus(Long reservationId, Long librarianId, Reservation newReservation) {
+    public Reservation updateReservation(Long reservationId, Long librarianId, Reservation newReservation) {
         Reservation reservation = reservationRepository.findById(reservationId)
                 .orElseThrow(() -> new EntityNotFoundException("Reservation not found"));
         if (!librarianId.equals(reservation.getExemplary().getBook().getLibrary().getLibrarian().getId())) {
@@ -38,6 +42,8 @@ public class ReservationService {
         if (!reservation.getStatus().isNextStatePossible(newReservation.getStatus())) {
             throw new EntityNotFoundException("Cannot update status of reservation");
         }
+        reservation.setStartDate(newReservation.getStartDate());
+        reservation.setEndDate(newReservation.getEndDate());
         reservation.setStatus(newReservation.getStatus());
         return reservationRepository.save(reservation);
     }
