@@ -1,6 +1,5 @@
 package bookstore.application.dto;
 
-import bookstore.application.entity.Library;
 import bookstore.application.enums.Category;
 import lombok.*;
 

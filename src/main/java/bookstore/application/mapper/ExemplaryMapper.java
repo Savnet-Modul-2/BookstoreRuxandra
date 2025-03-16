@@ -23,6 +23,7 @@ public class ExemplaryMapper {
                 .id(exemplary.getId())
                 .publisher(exemplary.getPublisher())
                 .maximumReservationDuration(exemplary.getMaximumReservationDuration())
+                .book(BookMapper.mapBookToBookDto.apply(exemplary.getBook()))
                 .build();
     }
 }

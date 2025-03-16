@@ -3,7 +3,6 @@ package bookstore.application.mapper;
 import bookstore.application.dto.LibraryDto;
 import bookstore.application.entity.Library;
 
-import java.util.ArrayList;
 import java.util.function.Function;
 
 public class LibraryMapper {

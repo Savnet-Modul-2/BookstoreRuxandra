@@ -40,4 +40,8 @@ public class BookService {
         Pageable pageable = PageRequest.of(page, size);
         return bookRepository.findAll(pageable);
     }
+
+    public List<Book> findByTitleAndAuthor(String title, String author) {
+        return bookRepository.findByTitleAndAuthor(title, author);
+    }
 }

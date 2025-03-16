@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -34,6 +35,15 @@ public class ExemplaryController {
         List<Exemplary> exemplars = exemplaryService.getAll(bookId);
         return ResponseEntity.ok(exemplars.stream()
                 .map(ExemplaryMapper.mapExemplaryToExemplaryDto));
+    }
+
+    @GetMapping("/{bookId}")
+    public ResponseEntity<?> findExemplary(
+            @PathVariable Long bookId,
+            @RequestParam LocalDate startDate,
+            @RequestParam LocalDate endDate) {
+        Exemplary exemplary = exemplaryService.findFirstAvailable(bookId, startDate, endDate);
+        return ResponseEntity.ok(ExemplaryMapper.mapExemplaryToExemplaryDto.apply(exemplary));
     }
 
     @DeleteMapping("/{bookId}")
