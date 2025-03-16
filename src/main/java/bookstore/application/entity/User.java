@@ -1,5 +1,6 @@
 package bookstore.application.entity;
 
+import bookstore.application.enums.Gender;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,6 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @Builder
+@EqualsAndHashCode
 @Entity(name = "user")
 @Table(name = "user", schema = "public")
 public class User {
@@ -27,7 +29,7 @@ public class User {
     private Integer yearOfBirth;
 
     @Column(name = "GENDER")
-    private String gender;
+    private Gender gender;
 
     @Column(name = "EMAIL", unique = true)
     private String email;

@@ -3,7 +3,6 @@ package bookstore.application.service;
 import bookstore.application.entity.User;
 import bookstore.application.exceptions.IncorrectPasswordException;
 import bookstore.application.exceptions.ProvidedUserIdException;
-import bookstore.application.mapper.UserMapper;
 import bookstore.application.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,21 +29,22 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User verifyCode(Long id, Long code){
-        User userToVerify = userRepository.findById(id).orElseThrow(()->new EntityNotFoundException("User not found"));
-        if(!Objects.equals(userToVerify.getVerificationCode(), code)){
+    public User verifyCode(String email, Long code) {
+        User userToVerify = userRepository.findByEmail(email)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+        if (!Objects.equals(userToVerify.getVerificationCode(), code)) {
             throw new RuntimeException("Incorrect verification code");
         }
         userToVerify.setVerifiedAccount(true);
         return userRepository.save(userToVerify);
     }
 
-    public User loginUser(User user){
-        User userToLogin = userRepository.findByEmail(user.getEmail()).orElseThrow(() -> new EntityNotFoundException("User not found"));
-        System.out.println(userToLogin);
+    public User login(User user) {
+        User userToLogin = userRepository.findByEmail(user.getEmail())
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
         String encodedPassword = PasswordService.getMd5(user.getPassword());
         assert userToLogin != null;
-        if(encodedPassword.equals(userToLogin.getPassword())){
+        if (encodedPassword.equals(userToLogin.getPassword())) {
             return userToLogin;
         }
         throw new IncorrectPasswordException("Incorrect password");

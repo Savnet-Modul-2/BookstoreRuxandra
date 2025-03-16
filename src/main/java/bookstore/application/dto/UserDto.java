@@ -1,5 +1,6 @@
 package bookstore.application.dto;
 
+import bookstore.application.enums.Gender;
 import lombok.*;
 
 @Getter
@@ -8,6 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @Builder
+@EqualsAndHashCode
 public class UserDto {
     private Long id = null;
 
@@ -17,7 +19,7 @@ public class UserDto {
 
     private Integer yearOfBirth;
 
-    private String gender;
+    private Gender gender;
 
     private String email;
 
