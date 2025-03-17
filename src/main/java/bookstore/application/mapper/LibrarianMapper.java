@@ -16,7 +16,7 @@ public class LibrarianMapper {
                 .name(librarianDto.getName())
                 .email(librarianDto.getEmail())
                 .password(librarianDto.getPassword())
-                .library(LibraryMapper.mapLibraryDtoToLibrary.apply(librarianDto.getLibraryDto()))
+                .library(LibraryMapper.mapLibraryDtoToLibrary.apply(librarianDto.getLibrary()))
                 .build();
     }
 
@@ -26,7 +26,7 @@ public class LibrarianMapper {
                 .name(librarian.getName())
                 .email(librarian.getEmail())
                 .password(librarian.getPassword())
-                .libraryDto(LibraryMapper.mapLibraryToLibraryDto.apply(librarian.getLibrary()))
+                .library(LibraryMapper.mapLibraryToLibraryDto.apply(librarian.getLibrary()))
                 .build();
     }
 }

@@ -1,6 +1,7 @@
 package bookstore.application.dto;
 
 import bookstore.application.enums.Category;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -15,10 +16,13 @@ import java.time.LocalDate;
 public class BookDto {
     private Long id;
 
+    @NotNull
     private Long isbn;
 
+    @NotNull
     private String title;
 
+    @NotNull
     private String author;
 
     private LocalDate appearanceDate;
@@ -28,4 +32,6 @@ public class BookDto {
     private Category category;
 
     private String language;
+
+    private LibraryDto library;
 }

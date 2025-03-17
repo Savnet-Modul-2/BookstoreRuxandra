@@ -1,4 +1,4 @@
 package bookstore.application.validator;
 
-public interface DateValidator {
+public interface InformationValidator {
 }

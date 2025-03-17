@@ -29,8 +29,9 @@ public class ReservationController {
     @PutMapping("/update-reservation/{reservationId}/{librarianId}")
     public ResponseEntity<?> updateReservationStatus(@PathVariable Long reservationId,
                                                      @PathVariable Long librarianId,
+                                                     @Validated(DateValidatorSequence.class)
                                                      @RequestBody ReservationDto reservationDto) {
-        Reservation reservation = reservationService.updateStatus(reservationId, librarianId,
+        Reservation reservation = reservationService.updateReservation(reservationId, librarianId,
                 ReservationMapper.mapReservationDtoToReservation.apply(reservationDto));
         return ResponseEntity.ok(ReservationMapper.mapReservationToReservationDto.apply(reservation));
     }

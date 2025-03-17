@@ -2,12 +2,16 @@ package bookstore.application.service;
 
 import bookstore.application.entity.Librarian;
 import bookstore.application.entity.Library;
+import bookstore.application.entity.Reservation;
+import bookstore.application.entity.User;
 import bookstore.application.exceptions.IncorrectPasswordException;
 import bookstore.application.exceptions.ProvidedUserIdException;
 import bookstore.application.repository.LibrarianRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class LibrarianService {
@@ -16,6 +20,9 @@ public class LibrarianService {
 
     @Autowired
     private LibraryService libraryService;
+
+    @Autowired
+    private EmailService emailService;
 
     public Librarian create(Librarian librarian) {
         if (librarian.getId() != null) {
@@ -36,5 +43,13 @@ public class LibrarianService {
             return librarianToLogin;
         }
         throw new IncorrectPasswordException("Incorrect password");
+    }
+
+    public void notifyLibrarianDelayedReservations(List<Reservation> reservationsDelayed) {
+        for (Reservation reservation : reservationsDelayed) {
+            String librarianEmail = reservation.getExemplary().getBook().getLibrary().getLibrarian().getEmail();
+            User user = reservation.getUser();
+            emailService.sendDelayedReservationMail(librarianEmail, user);
+        }
     }
 }

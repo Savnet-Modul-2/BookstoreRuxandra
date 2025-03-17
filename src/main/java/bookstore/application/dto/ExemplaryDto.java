@@ -1,5 +1,6 @@
 package bookstore.application.dto;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Getter
@@ -12,8 +13,10 @@ import lombok.*;
 public class ExemplaryDto {
     private Long id;
 
+    @NotNull
     private String publisher;
 
+    @NotNull
     private Integer maximumReservationDuration;
 
     private BookDto book;
