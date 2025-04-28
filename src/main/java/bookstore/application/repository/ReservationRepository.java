@@ -13,8 +13,8 @@ import java.util.List;
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
     @Query(value = """
         SELECT r FROM reservation r
-        WHERE r.startDate < :today
+        WHERE r.startDate < :day
         AND r.status = :status
     """)
-    List<Reservation> findAllReservations(LocalDate today, ReservationStatus status);
+    List<Reservation> findAllReservationsBeforeADay(LocalDate day, ReservationStatus status);
 }

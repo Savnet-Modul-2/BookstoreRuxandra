@@ -3,6 +3,8 @@ package bookstore.application.dto;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,4 +22,6 @@ public class ExemplaryDto {
     private Integer maximumReservationDuration;
 
     private BookDto book;
+
+    private LocalDateTime updateTime;
 }

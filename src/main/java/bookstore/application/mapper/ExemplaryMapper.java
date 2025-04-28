@@ -24,6 +24,7 @@ public class ExemplaryMapper {
                 .publisher(exemplary.getPublisher())
                 .maximumReservationDuration(exemplary.getMaximumReservationDuration())
                 .book(BookMapper.mapBookToBookDto.apply(exemplary.getBook()))
+                .updateTime(exemplary.getUpdateTime())
                 .build();
     }
 }

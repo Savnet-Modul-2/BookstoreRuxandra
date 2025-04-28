@@ -14,7 +14,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Target(ElementType.FIELD)
 @Retention(RUNTIME)
 public @interface ValidPassword {
-    String message() default "Password must have at least 6 characters, a number and a special character";
+    String message() default "Password must have at least 6 characters, at least a number and at least a special character";
 
     Class<?>[] groups() default {};
 
