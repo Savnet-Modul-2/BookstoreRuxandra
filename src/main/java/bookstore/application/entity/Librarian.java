@@ -3,6 +3,9 @@ package bookstore.application.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -33,4 +36,10 @@ public class Librarian {
     @JoinColumn(name = "library_id",
             referencedColumnName = "id")
     private Library library;
+
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            orphanRemoval = true,
+            mappedBy = "librarian")
+    private List<Tag> tags = new ArrayList<>();
 }

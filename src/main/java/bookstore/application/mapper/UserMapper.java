@@ -39,6 +39,9 @@ public class UserMapper {
                 .country(user.getCountry())
                 .verifiedAccount(user.getVerifiedAccount())
                 .verificationCode(user.getVerificationCode())
+                .wishlist(user.getWishlist().stream()
+                        .map(BookMapper.mapBookToBookDto)
+                        .toList())
                 .build();
     }
 }

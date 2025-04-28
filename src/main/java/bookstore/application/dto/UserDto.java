@@ -1,5 +1,6 @@
 package bookstore.application.dto;
 
+import bookstore.application.entity.Book;
 import bookstore.application.enums.Gender;
 import bookstore.application.validator.ContactInformationValidator;
 import bookstore.application.validator.InformationValidator;
@@ -8,6 +9,9 @@ import bookstore.application.validator.password.ValidPassword;
 import bookstore.application.validator.phoneNumber.ValidPhoneNumber;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -27,7 +31,7 @@ public class UserDto {
 
     private Integer yearOfBirth;
 
-    private Gender gender;
+    private String gender;
 
     @NotNull(groups = InformationValidator.class)
     @ValidEmail(groups = ContactInformationValidator.class)
@@ -46,4 +50,6 @@ public class UserDto {
     private Boolean verifiedAccount = false;
 
     private Long verificationCode;
+
+    private List<BookDto> wishlist = new ArrayList<>();
 }

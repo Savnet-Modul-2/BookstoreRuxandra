@@ -1,7 +1,9 @@
 package bookstore.application.service;
 
 import bookstore.application.entity.Book;
+import bookstore.application.entity.User;
 import bookstore.application.repository.BookRepository;
+import bookstore.application.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,6 +17,9 @@ import java.util.List;
 public class BookService {
     @Autowired
     private BookRepository bookRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     public Book findById(Long id) {
         return bookRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Book not found"));

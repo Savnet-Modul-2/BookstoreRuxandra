@@ -32,7 +32,7 @@ public class User {
     private Integer yearOfBirth;
 
     @Column(name = "GENDER")
-    private Gender gender;
+    private String gender;
 
     @Column(name = "EMAIL", unique = true)
     private String email;
@@ -56,10 +56,26 @@ public class User {
             fetch = FetchType.LAZY,
             orphanRemoval = true,
             mappedBy = "user")
+    private List<Book> wishlist = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            orphanRemoval = true,
+            mappedBy = "user")
     private List<Reservation> reservations = new ArrayList<>();
 
     public void add(Reservation reservation) {
         reservations.add(reservation);
         reservation.setUser(this);
+    }
+
+    public void add(Book book) {
+        wishlist.add(book);
+        book.setUser(this);
+    }
+
+    public void remove(Book book){
+        wishlist.remove(book);
+        book.setUser(null);
     }
 }

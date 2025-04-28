@@ -1,13 +1,19 @@
 package bookstore.application.service;
 
+import bookstore.application.entity.Book;
 import bookstore.application.entity.User;
 import bookstore.application.exceptions.IncorrectPasswordException;
 import bookstore.application.exceptions.ProvidedUserIdException;
+import bookstore.application.repository.BookRepository;
 import bookstore.application.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -17,6 +23,9 @@ public class UserService {
 
     @Autowired
     private EmailService emailService;
+
+    @Autowired
+    private BookRepository bookRepository;
 
 
     public User create(User user) {
@@ -29,6 +38,13 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public User addBookToWishlist(Long userId, Book bookToAdd){
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("The user does not exist"));
+        user.add(bookToAdd);
+        return userRepository.save(user);
+    }
+
     public User verifyCode(String email, Long code) {
         User userToVerify = userRepository.findByEmail(email)
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
@@ -37,6 +53,24 @@ public class UserService {
         }
         userToVerify.setVerifiedAccount(true);
         return userRepository.save(userToVerify);
+    }
+
+    public void removeBookFromWishlist(Long userId, Book book){
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("The user does not exist"));
+        user.remove(book);
+        userRepository.save(user);
+    }
+
+    public List<Book> getWishlist(Long userId){
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("The user does not exist"));
+        return user.getWishlist();
+    }
+
+    public Page<Book> getWishlistPaginated(Long userId, Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return bookRepository.findAll(pageable);
     }
 
     public User login(User user) {
