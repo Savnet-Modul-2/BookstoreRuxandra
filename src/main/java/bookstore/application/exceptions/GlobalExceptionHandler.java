@@ -1,5 +1,6 @@
 package bookstore.application.exceptions;
 
+import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatusCode;
@@ -36,6 +37,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(IncorrectPasswordException.class)
     public ResponseEntity<?> handleIncorrectPasswordException(IncorrectPasswordException incorrectPasswordException) {
         ErrorDetail error = new ErrorDetail(incorrectPasswordException.getMessage());
+        return new ResponseEntity<>(error, BAD_REQUEST);
+    }
+
+    @ExceptionHandler(EntityExistsException.class)
+    public ResponseEntity<?> handleEntityExistsException(EntityExistsException entityExistsException) {
+        ErrorDetail error = new ErrorDetail(entityExistsException.getMessage());
         return new ResponseEntity<>(error, BAD_REQUEST);
     }
 

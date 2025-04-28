@@ -54,6 +54,16 @@ public class Book {
             mappedBy = "book")
     private List<Exemplary> exemplars = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            orphanRemoval = true,
+            mappedBy = "book")
+    private List<Tag> tags = new ArrayList<>();
+
     public void addExemplary(Exemplary exemplary) {
         exemplars.add(exemplary);
         exemplary.setBook(this);

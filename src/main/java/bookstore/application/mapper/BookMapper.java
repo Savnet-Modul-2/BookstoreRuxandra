@@ -33,7 +33,7 @@ public class BookMapper {
                 .nrOfPages(book.getNrOfPages())
                 .category(book.getCategory())
                 .language(book.getLanguage())
-                .library(LibraryMapper.mapLibraryToLibraryDto.apply(book.getLibrary()))
+//                .library(LibraryMapper.mapLibraryToLibraryDto.apply(book.getLibrary()))
                 .build();
     }
 }
