@@ -20,13 +20,13 @@ public class ReservationSchedulerService {
     @Autowired
     private LibrarianService librarianService;
 
-    @Scheduled(cron = "* * * * * *")
+    @Scheduled(cron = "0 0 0 * * *")
     public void updateReservationStatus() {
-        LocalDate now = LocalDate.now();
+        LocalDate today = LocalDate.now();
         List<Reservation> reservationsToBeCanceled = reservationRepository
-                .findAllReservations(now, ReservationStatus.PENDING);
+                .findAllReservationsBeforeADay(today, ReservationStatus.PENDING);
         List<Reservation> reservationsToBeDelayed = reservationRepository
-                .findAllReservations(now, ReservationStatus.IN_PROGRESS);
+                .findAllReservationsBeforeADay(today, ReservationStatus.IN_PROGRESS);
 
         reservationsToBeCanceled.forEach(reservation ->
                 reservation.setStatus(ReservationStatus.CANCELED));

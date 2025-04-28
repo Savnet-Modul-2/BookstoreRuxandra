@@ -3,6 +3,7 @@ package bookstore.application.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +37,13 @@ public class Exemplary {
             orphanRemoval = true,
             mappedBy = "exemplary")
     private List<Reservation> reservations = new ArrayList<>();
+
+    @Version
+    @Column(name = "version")
+    private Integer version;
+
+    @Column(name = "update_time")
+    private LocalDateTime updateTime;
 
     public void add(Reservation reservation) {
         reservations.add(reservation);

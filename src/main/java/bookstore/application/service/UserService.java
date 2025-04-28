@@ -43,7 +43,6 @@ public class UserService {
         User userToLogin = userRepository.findByEmail(user.getEmail())
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
         String encodedPassword = PasswordService.getMd5(user.getPassword());
-        assert userToLogin != null;
         if (encodedPassword.equals(userToLogin.getPassword())) {
             return userToLogin;
         }
